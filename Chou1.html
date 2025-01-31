@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古风抽签</title>
+    <style>
+        /* 背景图设置 - 请替换为您自己的图片URL */
+        body {
+            margin: 0;
+            height: 100vh;
+            background: url('https://s21.ax1x.com/2025/01/31/pEZ9tRU.jpg') no-repeat center center fixed;
+            /* ↑ 直接将图床URL粘贴在此处即可 ↓ 注意保留单引号 */
+            background-size: cover;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 抽签按钮样式 - 新增响应式尺寸 */
+        .draw-btn {
+            position: absolute;
+            top: 15%; /* 调整按钮垂直位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60vw; /* 屏幕宽度的60% */
+            height: 60vw; /* 保持圆形比例 */
+            border-radius: 50%;
+            background: #D4A373;
+            border: 3px solid #A87C4F;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.8s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30vw; /* 响应式字体 */
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .draw-btn:active {
+            transform: translateX(-50%) scale(0.95);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* 签文弹窗 */
+        .result-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s;
+        }
+
+        .result-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 签文内容样式 */
+        .result-title {
+            text-align: center;
+            font-size: 32px;
+            color: #D4A373;
+            margin-bottom: 15px;
+        }
+
+        .result-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+            white-space: pre-line;
+            text-align: center;
+        }
+
+        /* 知道了按钮 */
+        .confirm-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 8px 25px;
+            background: #D4A373;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .confirm-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <button class="draw-btn" onclick="drawLottery()">抽</button>
+    
+    <div class="result-box">
+        <div class="result-title" id="resultTitle"></div>
+        <div class="result-content" id="resultContent"></div>
+        <button class="confirm-btn" onclick="closeResult()">知道了</button>
+    </div>
+
+    <script>
+        // 签文数据
+        const lotteries = [
+            {
+                title: "上上",
+                content: `子宫
+天开地辟作良缘，日吉时良万物全；
+若得此签非小可，公行忠正帝王宣。
+
+解曰：急速非速，年来直时，
+佛神择笔，先报君知。
+此签万事求谋具吉利也。`
+            },
+            {
+                title: "中平",
+                content: `子宫
+鲸鱼未变守江湖，不可升腾离碧波；
+异日峥嵘身变化，许君一跃跳龙门。
+
+解曰：得忍且忍，得耐且耐，
+须用时，叫功名定在。
+此签几多有进，退则吉也。`
+            },
+            {
+                title: "下下",
+                content: `子宫
+临风冒雨去还归，役役劳身似燕儿；
+衔得泥来若作垒，到头垒坏复成泥。
+
+解曰：千般百计，晨昏不爽，
+谁心此事，劳心到底。
+此签燕子衔泥之象，万事芝心费力也。`
+            }
+        ];
+            // 修改后的抽签函数
+    function drawLottery() {
+        const btn = document.querySelector('.draw-btn');
+        const resultBox = document.querySelector('.result-box');
+        
+        // 第一步：按钮淡出 (0.8s)
+        btn.style.opacity = '0';
+        
+        // 第二步：500ms后执行抽签展示
+        setTimeout(() => {
+            const randomIndex = Math.floor(Math.random() * lotteries.length);
+            const selected = lotteries[randomIndex];
+            
+            document.getElementById('resultTitle').textContent = selected.title;
+            document.getElementById('resultContent').textContent = selected.content;
+            resultBox.classList.add('show');
+        }, 500); // 按钮开始消失500ms后执行
+    }
+
+    // 修改后的关闭函数
+    function closeResult() {
+        const resultBox = document.querySelector('.result-box');
+        const btn = document.querySelector('.draw-btn');
+        
+        // 第一步：关闭结果弹窗 (0.8s)
+        resultBox.classList.remove('show');
+        
+        // 第二步：弹窗开始关闭后立即恢复按钮
+        btn.style.opacity = '1';
+    }
+    </script>
+</body>
+</html>
