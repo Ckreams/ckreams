@@ -1096,17 +1096,39 @@ const resultBox = document.querySelector('.result-box');
 const resultTitle = document.getElementById('resultTitle');
 const resultContent = document.getElementById('resultContent');
 const confirmBtn = document.querySelector('.confirm-btn');
+const clickSound = document.getElementById('clickSound');
+const resultSound = document.getElementById('resultSound');
 
 // 事件监听
 document.addEventListener('DOMContentLoaded', () => {
     drawBtn.addEventListener('click', drawLottery);
     confirmBtn.addEventListener('click', closeResult);
+    // 预加载音频
+    clickSound.load();
+    resultSound.load();
+    
+    // 通过按钮点击解除浏览器自动播放限制
+    drawBtn.addEventListener('click', () => {
+        if (clickSound.paused) {
+            clickSound.play().then(() => clickSound.pause());
+        }
+    });
 });
+
+
 
 // 核心功能函数
 function drawLottery() {
+    // 播放点击音效
+    clickSound.currentTime = 0; // 重置播放进度
+    clickSound.play().catch(e => console.log('音效自动播放被阻止'))
+    
     // 淡出按钮动画
     drawBtn.style.opacity = '0';
+    
+    setTimeout(() => {
+        // 播放结果音效
+        resultSound.play();
     
     // 500ms后执行抽签
     setTimeout(() => {
@@ -1120,7 +1142,8 @@ function drawLottery() {
         // 显示结果弹窗
         resultBox.classList.add('show');
     }, 500);
-}
+  }
+ }
 
 function closeResult() {
     // 隐藏结果弹窗
