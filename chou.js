@@ -1112,9 +1112,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 核心功能函数
 function drawLottery() {
-    // 播放点击音效
-    clickSound.currentTime = 0; // 重置播放进度
-    clickSound.play().catch(e => console.log('音效自动播放被阻止'))
     
     // 淡出按钮动画
     drawBtn.style.opacity = '0';
