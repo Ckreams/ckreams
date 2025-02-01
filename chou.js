@@ -97,10 +97,13 @@ const drawBtn = document.querySelector('.draw-btn');
 const resultBox = document.querySelector('.result-box');
 const resultTitle = document.getElementById('resultTitle');
 const resultContent = document.getElementById('resultContent');
+const confirmBtn = document.querySelector('.confirm-btn');
 
-// 事件监听（现代事件绑定方式）
-drawBtn.addEventListener('click', drawLottery);
-document.querySelector('.confirm-btn').addEventListener('click', closeResult);
+// 事件监听
+document.addEventListener('DOMContentLoaded', () => {
+    drawBtn.addEventListener('click', drawLottery);
+    confirmBtn.addEventListener('click', closeResult);
+});
 
 // 核心功能函数
 function drawLottery() {
