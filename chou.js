@@ -1106,13 +1106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 预加载音频
     clickSound.load();
     resultSound.load();
-    
-    // 通过按钮点击解除浏览器自动播放限制
-    drawBtn.addEventListener('click', () => {
-        if (clickSound.paused) {
-            clickSound.play().then(() => clickSound.pause());
-        }
-    });
 });
 
 
@@ -1143,8 +1136,7 @@ function drawLottery() {
         resultBox.classList.add('show');
     }, 500);
   }
- }
-
+               
 function closeResult() {
     // 隐藏结果弹窗
     resultBox.classList.remove('show');
