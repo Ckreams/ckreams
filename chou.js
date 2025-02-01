@@ -1119,10 +1119,6 @@ function drawLottery() {
     // 淡出按钮动画
     drawBtn.style.opacity = '0';
     
-    setTimeout(() => {
-        // 播放结果音效
-        resultSound.play();
-    
     // 500ms后执行抽签
     setTimeout(() => {
         const randomIndex = Math.floor(Math.random() * lotteries.length);
